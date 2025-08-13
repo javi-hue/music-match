@@ -1,110 +1,30 @@
-const searchBtn = document.getElementById('searchBtn');
-const genreSelect = document.getElementById('genreSelect');
-const artistInput = document.getElementById('artistInput');
-const artistsContainer = document.getElementById('artistsContainer');
-const songsContainer = document.getElementById('songsContainer');
-const eventsContainer = document.getElementById('eventsContainer');
+function getRecommendations() {
+  const input = document.getElementById("userInput").value;
+  const resultsList = document.getElementById("resultsList");
+  resultsList.innerHTML = `<li>Buscando recomendaciones para: <strong>${input}</strong>...</li>`;
 
-// Token temporal de Spotify (puedes reemplazarlo por uno nuevo si expira)
-const SPOTIFY_TOKEN = "TU_TOKEN_TEMPORAL_AQUI";
-
-// Guardar género favorito
-genreSelect.addEventListener('change', () => {
-    localStorage.setItem('favoriteGenre', genreSelect.value);
-});
-
-// Cargar género favorito
-window.addEventListener('load', () => {
-    const favorite = localStorage.getItem('favoriteGenre');
-    if(favorite) genreSelect.value = favorite;
-});
-
-searchBtn.addEventListener('click', () => {
-    const genre = genreSelect.value;
-    const artistName = artistInput.value.trim();
-
-    if(!genre && !artistName){
-        alert("Selecciona un género o escribe un artista");
-        return;
-    }
-
-    artistsContainer.innerHTML = "";
-    songsContainer.innerHTML = "";
-    eventsContainer.innerHTML = "";
-
-    searchSpotify(genre, artistName);
-    showEvents(genre || artistName);
-});
-
-async function searchSpotify(genre, artistName){
-    try {
-        // Buscar artistas
-        let query = artistName ? `q=${encodeURIComponent(artistName)}&type=artist` : `q=genre:${genre}&type=artist`;
-        let res = await fetch(`https://api.spotify.com/v1/search?${query}&limit=5`, {
-            headers: { "Authorization": `Bearer ${SPOTIFY_TOKEN}` }
-        });
-        let data = await res.json();
-        if(!data.artists) return;
-
-        data.artists.items.forEach(artist => {
-            const card = document.createElement('div');
-            card.classList.add('card');
-            card.innerHTML = `
-                <img src="${artist.images[0]?.url || 'https://via.placeholder.com/200'}" alt="${artist.name}">
-                <h3>${artist.name}</h3>
-                <a href="${artist.external_urls.spotify}" target="_blank">Abrir en Spotify</a>
-            `;
-            artistsContainer.appendChild(card);
-
-            searchTopTracks(artist.id);
-        });
-
-    } catch(err){
-        console.error(err);
-    }
+  // Aquí iría la llamada a la API de Spotify o Last.fm
+  // Ejemplo de pseudocódigo:
+  // fetch(`https://api.spotify.com/v1/search?q=${input}&type=track`)
+  //   .then(response => response.json())
+  //   .then(data => mostrarResultados(data));
 }
 
-async function searchTopTracks(artistId){
-    try {
-        let res = await fetch(`https://api.spotify.com/v1/artists/${artistId}/top-tracks?market=US`, {
-            headers: { "Authorization": `Bearer ${SPOTIFY_TOKEN}` }
-        });
-        let data = await res.json();
-        if(!data.tracks) return;
+// Simulación de ranking
+document.getElementById("topTracks").innerHTML = `
+  <ol>
+    <li>Blinding Lights - The Weeknd</li>
+    <li>Levitating - Dua Lipa</li>
+    <li>As It Was - Harry Styles</li>
+  </ol>
+`;
 
-        data.tracks.slice(0,3).forEach(track => {
-            const card = document.createElement('div');
-            card.classList.add('card');
-            card.innerHTML = `
-                <img src="${track.album.images[0]?.url || 'https://via.placeholder.com/200'}" alt="${track.name}">
-                <h3>${track.name}</h3>
-                <a href="${track.external_urls.spotify}" target="_blank">Abrir en Spotify</a>
-                ${track.preview_url ? `<audio controls src="${track.preview_url}"></audio>` : ''}
-            `;
-            songsContainer.appendChild(card);
-        });
+// Geolocalización básica
+navigator.geolocation.getCurrentPosition(position => {
+  const { latitude, longitude } = position.coords;
+  document.getElementById("localEvents").innerHTML = `
+    <p>Tu ubicación: ${latitude.toFixed(2)}, ${longitude.toFixed(2)}</p>
+    <p>Eventos cercanos próximamente...</p>
+  `;
+});
 
-    } catch(err){
-        console.error(err);
-    }
-}
-
-// Función ficticia para eventos
-function showEvents(keyword){
-    const fakeEvents = [
-        {name: "Concierto VIP "+keyword, date: "2025-09-15", location: "Estadio Central"},
-        {name: "Festival "+keyword, date: "2025-10-01", location: "Parque Nacional"},
-        {name: "Show Exclusivo "+keyword, date: "2025-11-20", location: "Teatro Principal"}
-    ];
-
-    fakeEvents.forEach(event => {
-        const card = document.createElement('div');
-        card.classList.add('card');
-        card.innerHTML = `
-            <h3>${event.name}</h3>
-            <p>📅 ${event.date}</p>
-            <p>📍 ${event.location}</p>
-        `;
-        eventsContainer.appendChild(card);
-    });
-}
