@@ -1,50 +1,49 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MusicMatch</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recomendador Musical</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <header>
-        <h1>🎵 MusicMatch</h1>
-        <p>Encuentra artistas, canciones y conciertos según tu gusto musical</p>
-    </header>
+  <header>
+    <h1>🎶 Recomendador Musical</h1>
+    <p>Descubre nuevas canciones, playlists y conciertos según tus gustos.</p>
+  </header>
 
-    <main>
-        <section class="preferences">
-            <h2>Selecciona un género o busca un artista</h2>
-            <select id="genreSelect">
-                <option value="">-- Elige un género --</option>
-                <option value="pop">Pop</option>
-                <option value="rock">Rock</option>
-                <option value="hip-hop">Hip-Hop</option>
-                <option value="electronic">Electrónica</option>
-                <option value="jazz">Jazz</option>
-                <option value="classical">Clásica</option>
-                <option value="reggae">Reggae</option>
-                <option value="metal">Metal</option>
-                <option value="country">Country</option>
-                <option value="latin">Latina</option>
-            </select>
+  <section class="input-section">
+    <h2>¿Qué te gusta escuchar?</h2>
+    <input type="text" id="userInput" placeholder="Ej. Rock, Taylor Swift, Jazz..." />
+    <button onclick="getRecommendations()">Buscar</button>
+  </section>
 
-            <input type="text" id="artistInput" placeholder="Escribe el nombre de un artista">
-            <button id="searchBtn">Buscar</button>
-        </section>
+  <section id="recommendations">
+    <h2>🎧 Recomendaciones</h2>
+    <ul id="resultsList"></ul>
+  </section>
 
-        <section class="results">
-            <h2>Resultados</h2>
-            <div id="artistsContainer" class="cards"></div>
-            <div id="songsContainer" class="cards"></div>
-            <div id="eventsContainer" class="cards"></div>
-        </section>
-    </main>
+  <section id="ranking">
+    <h2>🔥 Ranking de Popularidad</h2>
+    <div id="topTracks"></div>
+  </section>
 
-    <footer>
-        <p>&copy; 2025 MusicMatch</p>
-    </footer>
+  <section id="events">
+    <h2>📍 Eventos Cercanos</h2>
+    <div id="localEvents"></div>
+  </section>
 
-    <script src="script.js"></script>
+  <section id="comments">
+    <h2>💬 Comentarios de Usuarios</h2>
+    <textarea placeholder="Escribe tu opinión..."></textarea>
+    <button>Enviar</button>
+  </section>
+
+  <footer>
+    <p>© 2025 Recomendador Musical | Proyecto GitHub</p>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
+
