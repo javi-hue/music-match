@@ -1,100 +1,46 @@
-/* Reset básico */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
-    font-family: 'Arial', sans-serif;
-    background: #121212;
-    color: #fff;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to right, #1db954, #191414);
+  color: #fff;
 }
 
 header {
-    text-align: center;
-    padding: 2rem;
-    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+  text-align: center;
+  padding: 2rem;
+  background-color: #121212;
 }
 
-header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
-}
-
-header p {
-    font-size: 1.1rem;
-}
-
-main {
-    padding: 2rem;
-}
-
-.preferences {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: center;
-    margin-bottom: 2rem;
-}
-
-.preferences select,
-.preferences input {
-    padding: 0.5rem;
-    font-size: 1rem;
-    border-radius: 5px;
-    border: none;
-    outline: none;
+input, textarea {
+  width: 80%;
+  padding: 0.5rem;
+  margin: 1rem auto;
+  display: block;
+  border-radius: 5px;
+  border: none;
 }
 
 button {
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    border: none;
-    border-radius: 5px;
-    background: #ff4b2b;
-    color: #fff;
-    cursor: pointer;
-    transition: transform 0.2s;
+  background-color: #1db954;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  margin: 0 auto;
 }
 
-button:hover {
-    transform: scale(1.05);
-}
-
-.cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1rem;
-}
-
-.card {
-    background: #1f1f1f;
-    border-radius: 10px;
-    padding: 1rem;
-    text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(255, 75, 43, 0.5);
-}
-
-.card img {
-    width: 100%;
-    border-radius: 10px;
-    margin-bottom: 0.5rem;
-}
-
-audio {
-    width: 100%;
-    margin-top: 0.5rem;
+section {
+  padding: 2rem;
+  background-color: rgba(0, 0, 0, 0.6);
+  margin: 1rem;
+  border-radius: 10px;
 }
 
 footer {
-    text-align: center;
-    padding: 1rem;
-    margin-top: 2rem;
-    background: #111;
+  text-align: center;
+  padding: 1rem;
+  background-color: #000;
 }
